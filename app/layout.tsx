@@ -1,27 +1,14 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/contexts/theme-provider";
 import { Navbar } from "@/components/navbar";
-import { Inter, Space_Mono, Space_Grotesk } from "next/font/google";
+import { Inter } from "next/font/google";
 import { Footer } from "@/components/footer";
 import "@/styles/globals.css";
 
 const InterMono = Inter({
   subsets: ["latin"],
   display: "swap",
-});
-
-const GeistSans = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-geist-sans",
-  display: "swap",
-  weight: "400",
-});
-
-const GeistMono = Space_Mono({
-  subsets: ["latin"],
-  variable: "--font-geist-mono",
-  display: "swap",
-  weight: "400",
+  variable: "--font-inter-mono",
 });
 
 export const metadata: Metadata = {

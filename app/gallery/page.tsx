@@ -2,7 +2,12 @@ import React from "react";
 import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 
-const GalleryImage = ({ imageSrc, caption }) => (
+interface GalleryImageProps {
+  imageSrc: string;
+  caption: string;
+}
+
+const GalleryImage: React.FC<GalleryImageProps> = ({ imageSrc, caption }) => (
   <figure className="mb-16 group">
     <div className="overflow-hidden rounded-xl bg-muted p-2 sm:p-4">
       <img

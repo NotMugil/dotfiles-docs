@@ -10,7 +10,19 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-const FeatureCard = ({ icon: Icon, title, description }) => (
+// Define the type for the props of FeatureCard
+interface FeatureCardProps {
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>; // Icon should be a React component type (SVG-based)
+  title: string;
+  description: string;
+}
+
+// Define the FeatureCard component
+const FeatureCard: React.FC<FeatureCardProps> = ({
+  icon: Icon,
+  title,
+  description,
+}) => (
   <div className="p-6 rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-md transition-shadow">
     <Icon className="w-8 h-8 mb-4 text-primary" />
     <h3 className="text-md font-semibold mb-2">{title}</h3>
@@ -64,9 +76,6 @@ export default function Home() {
         notmugil <span className="text-gray-500">.dotfiles</span>
       </h1>
       <p className="mb-8 max-w-[800px] text-muted-foreground sm:text-xl">
-        {/* A sleek, customizable dotfiles setup for Hyprland with the Catppuccin
-        Mocha palette, featuring AGS widgets, wallpaper selector, and more for a
-        functional and beautiful Wayland experience. */}
         my bowl of rice 🍚, inspired by{" "}
         <a
           href="https://www.reddit.com/r/unixporn/"
