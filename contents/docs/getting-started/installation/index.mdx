@@ -1,0 +1,168 @@
+---
+title: Installation
+description: Installation guide for installing my dotfiles.
+---
+
+<Note type="note" title="📄 Attention">
+    This dotfiles configuration is written with Arch Linux systems in mind. While it may work on other Linux distributions, it is optimized and tailored specifically for Arch Linux. You may need to make adjustments for compatibility if you're using a different distribution.
+</Note>
+
+There are two ways to install these dotfiles:
+
+   - <a href="#automated-installation">Automated Installation (Script)</a>: This method uses a script to automatically set up the dotfiles. However, the script is a bit messy and not perfect, so it may require some adjustments.
+   - <a href="#manual-installation">Manual Installation (Recommended)</a>: This is the preferred method, giving you full control over the installation process and allowing you to customize each dotfile according to your needs.
+
+It’s recommended to use the manual installation for a more reliable and tailored setup.
+
+## Manual Installation
+To get started, you can clone the dotfiles repository directly from GitHub.
+<Stepper>
+  <StepperItem title="Step 1: Clone the repository">
+  <Tabs defaultValue="HTTPS" className="pt-5 pb-1">
+    <TabsList>
+      <TabsTrigger value="HTTPS">HTTPS</TabsTrigger>
+      <TabsTrigger value="SSH">SSH</TabsTrigger>
+    </TabsList>
+      <TabsContent value="HTTPS">
+        ```bash
+        git clone https://github.com/NotMugil/dotfiles.git
+        ```
+      </TabsContent>
+      <TabsContent value="SSH">
+        ```bash
+        git clone git@github.com:NotMugil/dotfiles.git
+        ```
+      </TabsContent>
+  </Tabs>
+  </StepperItem>
+
+  <StepperItem title="Step 2: Access the dotfiles directory">
+    ```bash
+    cd dotfiles
+    ```
+  </StepperItem>
+
+  <StepperItem title="Step 3: Install necessary packages">
+    <Note title="Remember">
+      We'll be using `yay` as the AUR helper. If you prefer a different AUR helper, such as `paru`, simply adjust the commands accordingly.
+    </Note>
+
+      #### 📦 System Packages
+      ```plaintext
+      yay -Sy hyprland hyprlock hyprpicker hypridle kitty waybar \
+      rofi-wayland sddm swww zsh ufw brightnessctl playerctl neovim \
+      nano dunst grim slurp imv mpv mpd firefox git nano cliphist \
+      wl-clip-persist wl-clipboard polkit-kde-agent gnome-keyring
+      aylurs-gtk-shell-git wlogout
+      ```
+
+      #### 🫐 Networking & Bluetooth
+      ```bash
+      yay -Sy bluez bluez-utils blueman network-manager-applet
+
+      # After installing enable system service
+      systemctl enable bluetooth.service
+      ```
+
+      #### 📁 File Management
+      ```
+      yay -Sy thunar gvfs catfish eza tumbler ffmpegthumbnailer \
+      zip unzip udisks2 ifuse file-roller
+      ```
+      ```bash
+      # Optional thunar plugins
+      yay -Sy thunar-archive-plugin thunar-media-tags-plugin \
+      thunar-shares-plugin thunar-volman
+      ```
+
+      #### 🈂️ Fonts
+      ```bash
+      yay -Sy noto-fonts-cjk noto-fonts-emoji ttf-space-mono-nerd \
+      ttf-jetbrains-mono-nerd ttf-nerd-fonts-symbols
+
+      # After installing make sure to do
+      fc-cache -v
+      ```
+
+      #### 🚛 Additional Packages
+      ```bash
+      # GUI
+      yay -Sy nwg-look pavucontrol evince qbittorrent timeshift
+
+      # TUI
+      yay -Sy ranger neofetch zathura zathura-cb zathura-pdf-mupdf \
+      btop htop nvtop fd ripgrep tree gparted
+      ```
+
+  </StepperItem>
+
+  <StepperItem title="Step 4: Copy the configurations">
+    Finally, its time to copy the configurations to your system. Make sure to backup any of the previously available configuratios before copying mine.
+
+    ```bash
+    cp -r config/* ~/.config/
+    cp -r misc/* ~/
+    ```
+
+    Congratulations! you have installed the dotfiles. Restart your system to apply changes.
+  </StepperItem>
+</Stepper>
+
+## Automated Installation
+
+<Note type="danger" title="Danger">
+  The installation script is still a work in progress. Some features may not be fully implemented or tested yet.
+</Note>
+
+For a faster setup, use the `install.sh` script to perform an automated installation of the dotfiles in one step:
+
+```bash
+./install.sh
+```
+
+**Command Output:**
+
+```bash
+# Sample output
+[INFO] Starting dotfiles installation...
+
+[INFO] Cloning dotfiles repository...
+Cloning into '/home/user/dotfiles'...
+remote: Enumerating objects: 240, done.
+remote: Counting objects: 100% (240/240), done.
+remote: Compressing objects: 100% (132/132), done.
+remote: Total 240 (delta 45), reused 199 (delta 28), pack-reused 0
+Receiving objects: 100% (240/240), 5.03 MiB | 3.20 MiB/s, done.
+Resolving deltas: 100% (45/45), done.
+[INFO] Repository cloned successfully.
+
+[INFO] Navigating into the dotfiles directory...
+[INFO] Current directory: /home/user/dotfiles
+
+[INFO] Installing necessary system packages...
+:: Synchronizing package databases...
+sudo pacman -Syu --noconfirm
+...
+[INFO] System packages installed successfully.
+
+[INFO] Installing AUR packages using yay...
+yay -S --noconfirm paru nerd-fonts-complete
+:: Resolving dependencies...
+:: Looking for conflicting packages...
+
+[INFO] AUR packages installed successfully.
+
+[INFO] Symlinking dotfiles to home directory...
+ln -sf /home/user/dotfiles/.bashrc /home/user/.bashrc
+ln -sf /home/user/dotfiles/config/* /home/user/.config/
+ln -sf /home/user/dotfiles/misc/* /home/user/
+[INFO] Dotfiles symlinked successfully.
+
+[INFO] Applying zsh configuration...
+chsh -s /usr/bin/zsh
+[INFO] Default shell changed to zsh.
+
+[INFO] Installation complete!
+[INFO] Please restart your terminal or session to apply all changes.
+
+```
