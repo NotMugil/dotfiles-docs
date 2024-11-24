@@ -120,49 +120,43 @@ For a faster setup, use the `install.sh` script to perform an automated installa
 ./install.sh
 ```
 
-**Command Output:**
+## Post Installation
+After finishing the installation, there are a few more steps that you'll have to do in order to finalize the customization.
 
-```bash
-# Sample output
-[INFO] Starting dotfiles installation...
+## Other configurations
+  ####
 
-[INFO] Cloning dotfiles repository...
-Cloning into '/home/user/dotfiles'...
-remote: Enumerating objects: 240, done.
-remote: Counting objects: 100% (240/240), done.
-remote: Compressing objects: 100% (132/132), done.
-remote: Total 240 (delta 45), reused 199 (delta 28), pack-reused 0
-Receiving objects: 100% (240/240), 5.03 MiB | 3.20 MiB/s, done.
-Resolving deltas: 100% (45/45), done.
-[INFO] Repository cloned successfully.
+  #### SDDM
+    ```bash
+      # Install the desired theme
+      git clone https://github.com/aczw/sddm-theme-corners.git theme &&
+      sudo cp -r theme/corners/ /usr/share/sddm/themes/
+    ```
+    After installing your theme, edit the `/etc/sddm.conf.d/kde_settings.conf` to match your theme name that is placed in `/usr/share/sddm/themes/`
+    ```plaintext:kde_settings.conf showLineNumbers {10-11}
+    [Autologin]
+    Relogin=false
+    Session=
+    User=
 
-[INFO] Navigating into the dotfiles directory...
-[INFO] Current directory: /home/user/dotfiles
+    [General]
+    HaltCommand=/usr/bin/systemctl poweroff
+    RebootCommand=/usr/bin/systemctl reboot
 
-[INFO] Installing necessary system packages...
-:: Synchronizing package databases...
-sudo pacman -Syu --noconfirm
-...
-[INFO] System packages installed successfully.
+    [Theme]
+    Current=Corners
 
-[INFO] Installing AUR packages using yay...
-yay -S --noconfirm paru nerd-fonts-complete
-:: Resolving dependencies...
-:: Looking for conflicting packages...
+    [Users]
+    MaximumUid=60513
+    MinimumUid=1000
 
-[INFO] AUR packages installed successfully.
+    ```
 
-[INFO] Symlinking dotfiles to home directory...
-ln -sf /home/user/dotfiles/.bashrc /home/user/.bashrc
-ln -sf /home/user/dotfiles/config/* /home/user/.config/
-ln -sf /home/user/dotfiles/misc/* /home/user/
-[INFO] Dotfiles symlinked successfully.
+  #### Wallpapers
+    ```bash
+    # Create wallpaper dir, if it doesn't exist
+    mkdir -p ~/.wallpapers
 
-[INFO] Applying zsh configuration...
-chsh -s /usr/bin/zsh
-[INFO] Default shell changed to zsh.
-
-[INFO] Installation complete!
-[INFO] Please restart your terminal or session to apply all changes.
-
-```
+    # Copy your wallpapers into the created dir
+    cp -r walls/* ~/.wallpapers/
+    ```
