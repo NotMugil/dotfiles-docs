@@ -55,7 +55,10 @@ export default function Gallery() {
         <div className="flex flex-row items-center gap-5 mt-8">
           <Link
             href="/docs/getting-started/installation"
-            className={buttonVariants({ className: "px-6", size: "lg" })}
+            className={buttonVariants({
+              className: "px-2 md:px-6",
+              size: "lg",
+            })}
           >
             Install Now
           </Link>
@@ -63,7 +66,7 @@ export default function Gallery() {
             href="https://github.com/NotMugil/dotfiles"
             className={buttonVariants({
               variant: "secondary",
-              className: "px-6",
+              className: "px-4 md:px-6",
               size: "lg",
             })}
           >
