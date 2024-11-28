@@ -26,23 +26,15 @@ export default function Gallery() {
   const screenshots = [
     {
       imageSrc: "/gallery-01.png",
-      caption: "Lockscreen (Hyprlock)",
+      caption: "lockscreen (hyprlock)",
     },
     {
       imageSrc: "/gallery-05.png",
-      caption: "Waybar, Neofetch, Thunar",
+      caption: "eww bar, neofetch, thunar",
     },
     {
       imageSrc: "/gallery-09.png",
-      caption: "Wlogout menu",
-    },
-    {
-      imageSrc: "/gallery-13.png",
-      caption: "Rofi Application launcher",
-    },
-    {
-      imageSrc: "/gallery-17.png",
-      caption: "Wallpaper Selector with rofi",
+      caption: "notification center",
     },
   ];
 
